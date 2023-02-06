@@ -1674,11 +1674,11 @@
             "childIndex": 56,
             "point": [
               -11.51,
-              858.45
+              760.45
             ],
             "size": [
-              434.89,
-              273.55
+              441.15,
+              371.55
             ],
             "rotation": 0,
             "style": {
@@ -2277,7 +2277,7 @@
             "childIndex": 67,
             "point": [
               -192.77,
-              845.97
+              842.29
             ],
             "rotation": 0,
             "bend": 0,
@@ -2297,7 +2297,7 @@
                 "index": 1,
                 "point": [
                   165.26,
-                  74.82
+                  61.43
                 ],
                 "canBind": true,
                 "bindingId": "069ce9c2-093c-4f8e-1a7b-1670389ec93a"
@@ -2307,7 +2307,7 @@
                 "index": 2,
                 "point": [
                   82.63,
-                  37.41
+                  30.72
                 ]
               }
             },
@@ -3683,8 +3683,8 @@
             "parentId": "page",
             "childIndex": 107,
             "point": [
-              -0.91,
-              793.46
+              -7.17,
+              735.08
             ],
             "rotation": 0,
             "text": "All comments for that review id",
@@ -4011,6 +4011,56 @@
               0.5,
               0.5
             ]
+          },
+          "75c30eec-13c7-46c6-2ae1-2c5d0a4e184d": {
+            "id": "75c30eec-13c7-46c6-2ae1-2c5d0a4e184d",
+            "type": "rectangle",
+            "name": "Rectangle",
+            "parentId": "page",
+            "childIndex": 115,
+            "point": [
+              21.58,
+              777.31
+            ],
+            "size": [
+              384.66,
+              80.23
+            ],
+            "rotation": 0,
+            "style": {
+              "color": "cyan",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1
+            },
+            "label": "",
+            "labelPoint": [
+              0.5,
+              0.5
+            ]
+          },
+          "5f82ab3e-9eb3-464a-3543-53f3ec6bcddf": {
+            "id": "5f82ab3e-9eb3-464a-3543-53f3ec6bcddf",
+            "type": "text",
+            "name": "Text",
+            "parentId": "page",
+            "childIndex": 116,
+            "point": [
+              31.47,
+              795.84
+            ],
+            "rotation": 0,
+            "text": "review body and owner, created at",
+            "style": {
+              "color": "cyan",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "middle"
+            }
           }
         },
         "bindings": {
