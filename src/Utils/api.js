@@ -5,7 +5,9 @@ const ncGamesAPI = axios.create({
 })
 
 export const getReviews = () => {
-    return ncGamesAPI.get('/reviews').then(({data})=>{
-        return data
-    })
+    return ncGamesAPI.get('/reviews').then(({data})=>{return data})
+}
+
+export const getReviewById = (review_id) => {
+    return ncGamesAPI.get(`/reviews/${review_id}`).then(({data})=> {return data})
 }

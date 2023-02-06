@@ -15,12 +15,12 @@ function App() {
     <div className="App">
       <header>
         <h1>NC Games</h1>
+      </header>
         <Routes>
           <Route path='/categories' element={<Categories categories={categories} setCategories={setCategories}/>}></Route>
           <Route path='/reviews/*' element={<Reviews categories={categories} setCategories={setCategories}/>}></Route>
           <Route path='users' element={<Users/>}></Route>
         </Routes>
-      </header>
     </div>
   );
 }
