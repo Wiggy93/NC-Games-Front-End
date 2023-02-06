@@ -9,7 +9,7 @@ export const Reviews = (categories, setCategories) => {
 
     useEffect(()=>{
         getReviews().then((data)=>{
-            console.log(data.reviews);
+            setReviews(data.reviews)
         })
     },[])
 
@@ -17,6 +17,15 @@ export const Reviews = (categories, setCategories) => {
         <main>
             <ReviewQueries setReviews={setReviews} setCategories={setCategories}/>
             <section>
+                <ul>
+                    {reviews.map((review)=>{
+                        return (
+                            <article>
+                                
+                            </article>
+                        )
+                    })}
+                </ul>
                 {/* {map through all the single reviews pulled in} */}
                 <ul>holding section for all the reviews that come back</ul>
                 <SingleReview reviews={reviews}/>
