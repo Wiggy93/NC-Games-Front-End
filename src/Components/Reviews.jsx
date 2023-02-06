@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import {Routes, Route } from 'react-router-dom';
+import {Routes, Route, Link } from 'react-router-dom';
 import {ReviewQueries} from './ReviewQueries';
 import {SingleReview} from './SingleReview';
-import { getReviews } from '../Utils/api';
+import { getReviewById, getReviews } from '../Utils/api';
 import {ReviewVotes} from './ReviewVotes';
 import { CommentTotal } from './CommentTotal';
 import { Comments } from './Comments';
@@ -36,9 +36,19 @@ export const Reviews = (categories, setCategories) => {
                     {reviews.map((review)=>{
                         return (
                             <article className={styles.singleReviewBox} key={review.review_id}>
-                                <button onClick={onClick}>
+                                <Link to={`/reviews/${review.review_id}`}>
+                                <button onClick={(e) => {
+                                    setCurrentReview(review.review_id).then(()=>{
+                                        return <SingleReview currentReview={currentReview}/>
+
+                                    })
+                                    
+                                    }}>
                                     <h2>{review.title}</h2>
                                 </button>
+                                
+                                </Link>
+
                                 <h3>{review.owner}</h3>
                                 <p>{review.created_at}</p>
                                 <p className={styles.singleReviewBody}>{review.review_body}</p>

@@ -1,24 +1,29 @@
-
-
-
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {Routes, Route} from 'react-router-dom'
+import { getReviewById } from '../Utils/api';
 
-
-export const SingleReview = (reviews) => {
+export const SingleReview = (currentReview) => {
    
-
-    //useEffect, on opening page run setCurrentReview to current reivw_id
-
+    useEffect(()=>{
+        getReviewById(currentReview).then(({data}) => {
+            return data;
+         })
+        }
+    ,[])
+    
     return (
         <section>
            
-         
+            <p>singel review page</p>
             
             
 
         </section>
     )
-}
+    
+    }
+    //useEffect, on opening page run setCurrentReview to current reivw_id
+
+
 
 
