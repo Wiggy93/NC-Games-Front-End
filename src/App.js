@@ -1,4 +1,4 @@
-import './App.css';
+import './CSS/App.css';
 
 import {Categories} from './Components/Categories'
 import {Reviews} from './Components/Reviews'

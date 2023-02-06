@@ -1,10 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {ReviewQueries} from './ReviewQueries';
 import {SingleReview} from './SingleReview';
+import { getReviews } from '../Utils/api';
 
 
 export const Reviews = (categories, setCategories) => {
     const [reviews, setReviews] = useState([])
+
+    useEffect(()=>{
+        getReviews().then((data)=>{
+            console.log(data.reviews);
+        })
+    },[])
 
     return (
         <main>
