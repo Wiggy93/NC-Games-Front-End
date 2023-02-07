@@ -16,19 +16,16 @@ export const Reviews = (categories, setCategories) => {
     const [commentCount, setCommentCount] = useState("");
     const [currentReview, setCurrentReview] = useState([]);
     const [comments, setComments] = useState([]); 
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(()=>{
         getReviews().then((data)=>{
-            setReviews(data.reviews)
+            setReviews(data.reviews);
+            setIsLoading(false)
         })
     },[])
 
-    //working on in next branch for getting single review page up and running
-    const onClick = (e) => {
-        //got up to with attempting to make buttong for going to single review.
-        console.log(e);
-        // setCurrentReview()
-    }
+    if(isLoading) return <p>Loading results...</p>
 
     return (
         <main>
@@ -36,31 +33,21 @@ export const Reviews = (categories, setCategories) => {
             <ul className={styles.reviewsBox}>
                     {reviews.map((review)=>{
                         return (
-                            <article className={styles.singleReviewBox} key={review.review_id}>
-                                <Link to={`/reviews/${review.review_id}`}>
-                                <button onClick={(e) => {
-                                    setCurrentReview(review.review_id).then(()=>{
-                                        return <SingleReview currentReview={currentReview}/>
-
-                                    })
-                                    
-                                    }}>
+                        <Link to={`/reviews/${review.review_id}`}  key={review.review_id}>
+                            <article className={styles.singleReviewBox}>
                                     <h2>{review.title}</h2>
-                                </button>
-                                
+                                    <h3>{review.owner}</h3>
+                                    <p>{review.created_at}</p>
+                                    <p className={styles.singleReviewBody}>{review.review_body}</p>
+                                    <p>Votes: {review.votes}</p>
+                                    <ReviewVotes voteCount={voteCount} setVoteCount={setVoteCount}/>
+                                    <p>Number of Comments: {review.comment_count}</p>
+                                    <CommentTotal commentCount={commentCount} setCommentCount={setCommentCount}/>
+                                    <Routes>
+                                        <Route path='/reviews/:reviewid/comments' element={<Comments currentReview={currentReview} setCommentCount={setCommentCount} setComments={setComments}/>}>Go to all comments for this review id holder</Route>
+                                    </Routes>
+                                </article>
                                 </Link>
-
-                                <h3>{review.owner}</h3>
-                                <p>{review.created_at}</p>
-                                <p className={styles.singleReviewBody}>{review.review_body}</p>
-                                <p>Votes: {review.votes}</p>
-                                <ReviewVotes voteCount={voteCount} setVoteCount={setVoteCount}/>
-                                <p>Number of Comments: {review.comment_count}</p>
-                                <CommentTotal commentCount={commentCount} setCommentCount={setCommentCount}/>
-                                <Routes>
-                                    <Route path='/reviews/:reviewid/comments' element={<Comments currentReview={currentReview} setCommentCount={setCommentCount} setComments={setComments}/>}>Go to all comments for this review id holder</Route>
-                                </Routes>
-                            </article>
                         )
                     })}
                 </ul>
