@@ -266,8 +266,8 @@
             "parentId": "page",
             "childIndex": 10,
             "point": [
-              -886.88,
-              571.49
+              -918.76,
+              553.27
             ],
             "rotation": 0,
             "text": "Categories",
@@ -4197,12 +4197,12 @@
             "parentId": "page",
             "childIndex": 122,
             "point": [
-              -927.49,
-              616.98
+              -934.32,
+              596.48
             ],
             "size": [
-              275.63,
-              51.73
+              314.35,
+              90.45
             ],
             "rotation": 0,
             "style": {
@@ -4225,11 +4225,11 @@
             "parentId": "page",
             "childIndex": 123,
             "point": [
-              -1123.7775970676494,
-              625.9660017690276
+              -923.56,
+              607.74
             ],
             "rotation": 0,
-            "text": "Also in each catgory, number of reviews, will need reviews props",
+            "text": "Also in each catgory, number of \nreviews, will need reviews props",
             "style": {
               "color": "blue",
               "size": "small",

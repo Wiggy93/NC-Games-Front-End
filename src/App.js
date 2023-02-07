@@ -15,7 +15,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState('tickle122')
   const [currentReview, setCurrentReview] = useState([]);
   const [comments, setComments] = useState([]); 
-  const [commentCount, setCommentCount] = useState("");
+  // const [commentCount, setCommentCount] = useState("");
 
   return (
     <div className="App">
@@ -26,10 +26,15 @@ function App() {
       </header>
         <Routes>       
           <Route path='/categories' element={<Categories categories={categories} setCategories={setCategories}/>}></Route>
-          <Route path='/reviews/*' element={<Reviews categories={categories} setCategories={setCategories}/>}></Route>
+          <Route path='/reviews/*' element={<Reviews 
+          categories={categories} 
+          setCategories={setCategories}
+          />}></Route>
           <Route path='users' element={<Users/>}></Route>
           <Route path='/reviews/:reviewid' element={<SingleReview setCurrentReview={setCurrentReview} currentReview={currentReview} />}></Route>
-          <Route path='/reviews/:reviewid/comments' element={<Comments setCommentCount={setCommentCount} setComments={setComments}/>}>Go to all comments for this review id holder</Route>
+          <Route path='/reviews/:reviewid/comments' element={<Comments
+          // setCommentCount={setCommentCount} setComments={setComments}
+          />}>Go to all comments for this review id holder</Route>
      
         </Routes>
       </main>
