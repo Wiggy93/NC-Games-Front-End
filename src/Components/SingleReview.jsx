@@ -25,19 +25,17 @@ export const SingleReview = ({currentReview, setCurrentReview}) => {
         
     },[])
     
-    const day = currentReview.created_at
-    // console.log(day.split(''), "day of month");
-    console.log(newTime);
-
-
-    return (
+     return (
         <section>
-            <p>tst</p>
+          <br></br>
             <h2>{currentReview.title}</h2>
+            <br></br>
             <h3>{currentReview.owner}</h3>
+            <br></br>
             <p>{newTime}</p>
+            <br></br>
+            <p>{currentReview.review_body}</p>
           
-            <p>singel review page</p>
             <Comments/>
             
 
