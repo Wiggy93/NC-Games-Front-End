@@ -12,6 +12,7 @@ import { SingleReview } from './Components/SingleReview';
 function App() {
   const [categories, setCategories] = useState([]);
   const [currentUser, setCurrentUser] = useState('tickle122')
+  const [currentReview, setCurrentReview] = useState({})
 
   return (
     <div className="App">
@@ -24,7 +25,7 @@ function App() {
           <Route path='/categories' element={<Categories categories={categories} setCategories={setCategories}/>}></Route>
           <Route path='/reviews/*' element={<Reviews categories={categories} setCategories={setCategories}/>}></Route>
           <Route path='users' element={<Users/>}></Route>
-          <Route path='/reviews/:reviewid' element={<SingleReview/>}></Route>
+          <Route path='/reviews/:reviewid' element={<SingleReview currentReview={currentReview} setCurrentReview={setCurrentReview}/>}></Route>
         </Routes>
       </main>
     </div>
