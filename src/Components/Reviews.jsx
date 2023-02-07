@@ -23,6 +23,7 @@ export const Reviews = (categories, setCategories) => {
         })
     },[])
 
+    //working on in next branch for getting single review page up and running
     const onClick = (e) => {
         //got up to with attempting to make buttong for going to single review.
         console.log(e);
@@ -52,7 +53,9 @@ export const Reviews = (categories, setCategories) => {
                                 <h3>{review.owner}</h3>
                                 <p>{review.created_at}</p>
                                 <p className={styles.singleReviewBody}>{review.review_body}</p>
+                                <p>Votes: {review.votes}</p>
                                 <ReviewVotes voteCount={voteCount} setVoteCount={setVoteCount}/>
+                                <p>Number of Comments: {review.comment_count}</p>
                                 <CommentTotal commentCount={commentCount} setCommentCount={setCommentCount}/>
                                 <Routes>
                                     <Route path='/reviews/:reviewid/comments' element={<Comments currentReview={currentReview} setCommentCount={setCommentCount} setComments={setComments}/>}>Go to all comments for this review id holder</Route>

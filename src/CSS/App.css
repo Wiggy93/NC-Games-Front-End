@@ -2,9 +2,12 @@
   margin: 0px;
 }
 
-.App {
+body {
   text-align: center;
   background-color: #E5E0FF;
   color: #7286D3;
 }
 
+main {
+  margin-top: 50px;
+}
