@@ -10,10 +10,6 @@ export const Comments = (currentReview, setComments) => {
 
     return (
         <section>
-            <div>
-                {}
-            </div>
-            <p>holder for review body for that id</p>
             <p>holder for mapping through current comments</p>
             <RemoveComment/>
             <AddComment setComments={setComments}/>
