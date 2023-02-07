@@ -9,5 +9,5 @@ export const getReviews = () => {
 }
 
 export const getReviewById = (review_id) => {
-    return ncGamesAPI.get(`/reviews/${review_id}`).then(({data})=> {return data})
+    return ncGamesAPI.get(`/reviews/${review_id}`).then((data)=> {return data})
 }

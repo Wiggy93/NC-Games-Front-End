@@ -1,25 +1,25 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
 import { getReviewById } from '../Utils/api';
+import { Comments } from './Comments';
 
-export const SingleReview = (currentReview) => {
+export const SingleReview = (currentReview, setCurrentReview) => {
    const { reviewid } = useParams();
-   console.log(useParams, "usePArams");
-   console.log(reviewid, "<<<game id 14 hopefully")
 
     useEffect(()=>{
-        getReviewById(reviewid).then(({data}) => {
-            console.log(data, "axios fetch data on review id");
-            return data;
+        getReviewById(+reviewid).then(({data}) => {
+            return data.reviewObj[0];
          })
-        }
-    ,[])
+         .then((response)=>{
+            
+         })
+        },[])
     
     return (
         <section>
            
             <p>singel review page</p>
-            
+            <Comments/>
             
 
         </section>
