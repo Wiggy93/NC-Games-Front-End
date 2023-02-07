@@ -5,6 +5,7 @@ import {ReviewVotes} from './ReviewVotes';
 import {Link} from 'react-router-dom'
 
 import styles from '../CSS/Reviews.module.css'
+import { dateConverter } from '../Utils/utils';
 
 
 export const Reviews = ({categories, setCategories}) => {
@@ -33,7 +34,7 @@ export const Reviews = ({categories, setCategories}) => {
                     <article className={styles.singleReviewBox}>
                         <h2>{review.title}</h2>
                         <h3>{review.owner}</h3>
-                        <p>{review.created_at}</p>
+                        <p>{dateConverter(review.created_at)}</p>
                         <p className={styles.singleReviewBody}>{review.review_body}</p>
                         <p>Votes: {review.votes}</p>
                         <ReviewVotes voteCount={voteCount} setVoteCount={setVoteCount}/>

@@ -7,24 +7,22 @@ import { Comments } from './Comments';
 export const SingleReview = ({currentReview, setCurrentReview}) => {
    const { reviewid } = useParams();
    const [newTime, setNewTime] = useState("")
-
+   const [isLoading, setIsLoading] = useState(true);
 
     useEffect(()=>{
-        getReviewById(+reviewid).then(({data}) => {
-            return data.reviewObj[0];
-        })
-        .then((response)=>{
-             console.log(response, "data.reviewObj");
-            setCurrentReview(response)
-            console.log(currentReview, "<<current review");
-        })
-        .then(()=>{
-            const changeDateFormat = dateConverter(currentReview.created_at)
-            setNewTime(changeDateFormat)
-        })
-        
+        getReviewById(+reviewid)
+        .then(({data}) => setCurrentReview(data.reviewObj[0]))
     },[])
     
+    useEffect(()=>{
+        const changeDateFormat = dateConverter(currentReview.created_at)
+        console.log(changeDateFormat, "changeformate in review");
+        setNewTime(changeDateFormat)
+        setIsLoading(false)
+    },[currentReview])
+
+    if(isLoading) return <p>Loading results...</p>
+
      return (
         <section>
           <br></br>
