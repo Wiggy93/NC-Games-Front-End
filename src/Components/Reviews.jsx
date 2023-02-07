@@ -37,18 +37,25 @@ export const Reviews = (categories, setCategories) => {
                     {reviews.map((review)=>{
                         return (
                             <article className={styles.singleReviewBox} key={review.review_id}>
+                                <h2>
                                 <Link to={`/reviews/${review.review_id}`}>
-                                <button onClick={(e) => {
+                                    {review.title}
+                                </Link>
+
+                                </h2>
+                                
+                                
+                                {/* <button onClick={(e) => {
                                     setCurrentReview(review.review_id).then(()=>{
                                         return <SingleReview currentReview={currentReview}/>
 
                                     })
                                     
                                     }}>
-                                    <h2>{review.title}</h2>
-                                </button>
+                                    
+                                </button> */}
                                 
-                                </Link>
+                                
 
                                 <h3>{review.owner}</h3>
                                 <p>{review.created_at}</p>

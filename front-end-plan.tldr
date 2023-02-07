@@ -4189,6 +4189,56 @@
               "font": "script",
               "textAlign": "middle"
             }
+          },
+          "7681cd7d-595d-4bfd-164c-80646cb6fff3": {
+            "id": "7681cd7d-595d-4bfd-164c-80646cb6fff3",
+            "type": "rectangle",
+            "name": "Rectangle",
+            "parentId": "page",
+            "childIndex": 122,
+            "point": [
+              -927.49,
+              616.98
+            ],
+            "size": [
+              275.63,
+              51.73
+            ],
+            "rotation": 0,
+            "style": {
+              "color": "blue",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1
+            },
+            "label": "",
+            "labelPoint": [
+              0.5,
+              0.5
+            ]
+          },
+          "6fb80484-71bb-43bc-3ff0-e42ba54673e1": {
+            "id": "6fb80484-71bb-43bc-3ff0-e42ba54673e1",
+            "type": "text",
+            "name": "Text",
+            "parentId": "page",
+            "childIndex": 123,
+            "point": [
+              -1123.7775970676494,
+              625.9660017690276
+            ],
+            "rotation": 0,
+            "text": "Also in each catgory, number of reviews, will need reviews props",
+            "style": {
+              "color": "blue",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "middle"
+            }
           }
         },
         "bindings": {

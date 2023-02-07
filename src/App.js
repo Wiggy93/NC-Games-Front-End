@@ -24,7 +24,7 @@ function App() {
           <Route path='/categories' element={<Categories categories={categories} setCategories={setCategories}/>}></Route>
           <Route path='/reviews/*' element={<Reviews categories={categories} setCategories={setCategories}/>}></Route>
           <Route path='users' element={<Users/>}></Route>
-          <Route path='/reviews/:reviewid' element={<SingleReview/>}></Route>
+          <Route path='/reviews/:reviewid' element={<SingleReview />}></Route>
         </Routes>
       </main>
     </div>
