@@ -28,3 +28,10 @@ h2, h3, p {
  
 }
 
+.noerror{
+    display: none;
+}
+
+.showerror {
+    display: block;
+}

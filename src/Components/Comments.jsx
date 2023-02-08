@@ -15,7 +15,6 @@ export const Comments = ({currentReview, setCommentCount}) => {
     useEffect(()=>{
         getCommentsById(reviewid).then((data)=>{
             setAllComments(data.comments)
-            console.log(data.comments, "<<<comments");
         })
     },[])
     
