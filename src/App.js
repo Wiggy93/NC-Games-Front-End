@@ -13,9 +13,7 @@ import { SingleReview } from './Components/SingleReview';
 function App() {
   const [categories, setCategories] = useState([]);
   const [currentUser, setCurrentUser] = useState('tickle122')
-  const [currentReview, setCurrentReview] = useState([]);
-  const [comments, setComments] = useState([]); 
-  // const [commentCount, setCommentCount] = useState("");
+  const [currentReview, setCurrentReview] = useState({})
 
   return (
     <div className="App">
@@ -31,11 +29,8 @@ function App() {
           setCategories={setCategories}
           />}></Route>
           <Route path='users' element={<Users/>}></Route>
-          <Route path='/reviews/:reviewid' element={<SingleReview setCurrentReview={setCurrentReview} currentReview={currentReview} />}></Route>
-          <Route path='/reviews/:reviewid/comments' element={<Comments
-          // setCommentCount={setCommentCount} setComments={setComments}
-          />}>Go to all comments for this review id holder</Route>
-     
+          <Route path='/reviews/:reviewid' element={<SingleReview currentReview={currentReview} setCurrentReview={setCurrentReview}/>}></Route>
+          <Route path='/reviews/:reviewid/comments' element={<Comments/>}></Route>
         </Routes>
       </main>
     </div>

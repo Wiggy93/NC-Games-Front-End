@@ -23,7 +23,7 @@ export const Reviews = ({categories, setCategories}) => {
     },[])
 
     if(isLoading) return <p>Loading results...</p>
-
+    
     return (
     <main>
         <ReviewQueries setReviews={setReviews} setCategories={setCategories}/>
