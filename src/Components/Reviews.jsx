@@ -18,7 +18,7 @@ export const Reviews = ({categories, setCategories}) => {
     useEffect(()=>{
         getReviews().then((data)=>{
             setReviews(data.reviews);
-            setIsLoading(false)
+            setIsLoading(false);
         })
     },[])
 

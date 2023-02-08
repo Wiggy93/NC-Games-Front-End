@@ -16,7 +16,7 @@ export const SingleReview = ({currentReview, setCurrentReview}) => {
     },[])
     
     useEffect(()=>{
-        const changeDateFormat = dateConverter(currentReview.created_at)
+        const changeDateFormat = dateConverter(currentReview.created_at);
         setNewTime(changeDateFormat)
         setIsLoading(false)
     },[currentReview])
@@ -37,10 +37,5 @@ export const SingleReview = ({currentReview, setCurrentReview}) => {
            <Comments />
            
         </section>
-          
-            
-
-    
     )
-    
-    }
+}
