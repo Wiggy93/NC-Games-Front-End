@@ -4,6 +4,7 @@ import { getCommentsById } from '../Utils/api';
 import { dateConverter } from '../Utils/utils';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
+import styles from '../CSS/Comments.module.css'
 
 export const Comments = ({currentReview, setCommentCount}) => {
     const { reviewid } = useParams();
@@ -20,18 +21,18 @@ export const Comments = ({currentReview, setCommentCount}) => {
     
 
     return (
-        <section>
-            <ol>
+        <section >
+            <div className='ol'>
                 {allComments.map((comment)=>{
                     return (
-                        <li>
-                            <p>{comment.author}</p>
-                            <p>{dateConverter(comment.created_at)}</p>
+                        <article className={styles.commentBox} key={comment.comment_id}>
+                            <p>Written by {comment.author} on {dateConverter(comment.created_at)}</p>
+                            <br></br>
                             <p>{comment.body}</p>
-                        </li>
+                        </article>
                     )
                 })}
-            </ol>
+            </div>
             <RemoveComment allComments={allComments}/>
             <AddComment setAllComments={setAllComments} allComments={allComments} setCommentCount={setCommentCount}/>
         </section>
