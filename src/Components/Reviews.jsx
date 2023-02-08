@@ -18,12 +18,12 @@ export const Reviews = ({categories, setCategories}) => {
     useEffect(()=>{
         getReviews().then((data)=>{
             setReviews(data.reviews);
-            setIsLoading(false)
+            setIsLoading(false);
         })
     },[])
 
     if(isLoading) return <p>Loading results...</p>
-    
+
     return (
     <main>
         <ReviewQueries setReviews={setReviews} setCategories={setCategories}/>

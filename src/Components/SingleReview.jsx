@@ -16,8 +16,7 @@ export const SingleReview = ({currentReview, setCurrentReview}) => {
     },[])
     
     useEffect(()=>{
-        const changeDateFormat = dateConverter(currentReview.created_at)
-        console.log(changeDateFormat, "changeformate in review");
+        const changeDateFormat = dateConverter(currentReview.created_at);
         setNewTime(changeDateFormat)
         setIsLoading(false)
     },[currentReview])
