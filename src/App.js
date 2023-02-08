@@ -4,6 +4,7 @@ import {Categories} from './Components/Categories'
 import {Reviews} from './Components/Reviews'
 import {Users} from './Components/Users'
 import { NavBar } from './Components/NavBar';
+import { Comments } from './Components/Comments';
 
 import {Routes, Route} from 'react-router-dom'
 import { useState } from 'react';
@@ -12,6 +13,7 @@ import { SingleReview } from './Components/SingleReview';
 function App() {
   const [categories, setCategories] = useState([]);
   const [currentUser, setCurrentUser] = useState('tickle122')
+  const [currentReview, setCurrentReview] = useState({})
 
   return (
     <div className="App">
@@ -24,7 +26,8 @@ function App() {
           <Route path='/categories' element={<Categories categories={categories} setCategories={setCategories}/>}></Route>
           <Route path='/reviews/*' element={<Reviews categories={categories} setCategories={setCategories}/>}></Route>
           <Route path='users' element={<Users/>}></Route>
-          <Route path='/reviews/:reviewid' element={<SingleReview/>}></Route>
+          <Route path='/reviews/:reviewid' element={<SingleReview currentReview={currentReview} setCurrentReview={setCurrentReview}/>}></Route>
+          <Route path='/reviews/:reviewid/comments' element={<Comments/>}></Route>
         </Routes>
       </main>
     </div>
