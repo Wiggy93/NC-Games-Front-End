@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
 import styles from '../CSS/Comments.module.css'
 
-export const Comments = ({currentReview, setCommentCount}) => {
+export const Comments = ({currentUser, setCurrentUser}) => {
     const { reviewid } = useParams();
     const [allComments, setAllComments] = useState([]);
     const [errorMessage, setErrorMessage] = useState({display: "none"})
@@ -67,8 +67,9 @@ export const Comments = ({currentReview, setCommentCount}) => {
                     )
                 })}
             </div>
+            <AddComment className={styles.postComment} setAllComments={setAllComments} allComments={allComments} currentUser={currentUser} setCurrentUser={setCurrentUser}/>
             <RemoveComment allComments={allComments}/>
-            <AddComment setAllComments={setAllComments} allComments={allComments} setCommentCount={setCommentCount}/>
+           
         </section>
     )
 }

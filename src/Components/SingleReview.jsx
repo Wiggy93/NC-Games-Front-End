@@ -3,11 +3,13 @@ import { useParams } from 'react-router-dom'
 import { getReviewById } from '../Utils/api';
 import { dateConverter } from '../Utils/utils';
 import { Comments } from './Comments';
+
 import styles from '../CSS/SingleReview.module.css'
 
 export const SingleReview = ({currentReview, setCurrentReview}) => {
    const { reviewid } = useParams();
    const [newTime, setNewTime] = useState("")
+  
    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(()=>{
@@ -34,8 +36,9 @@ export const SingleReview = ({currentReview, setCurrentReview}) => {
 
             <p id={styles.body} className={styles.gridItem}>{currentReview.review_body} </p>
            
-           <Comments />
            
+           
+           <Comments />
         </section>
     )
 }

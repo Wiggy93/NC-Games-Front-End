@@ -28,7 +28,7 @@ function App() {
           />}></Route>
           <Route path='users' element={<Users/>}></Route>
           <Route path='/reviews/:reviewid' element={<SingleReview currentReview={currentReview} setCurrentReview={setCurrentReview}/>}></Route>
-          <Route path='/reviews/:reviewid/comments' element={<Comments/>}></Route>
+          <Route path='/reviews/:reviewid/comments' element={<Comments currentUser={currentUser} setCurrentUser={setCurrentUser}/>}></Route>
         </Routes>
       </main>
     </div>
