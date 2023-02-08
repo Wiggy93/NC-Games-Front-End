@@ -20,3 +20,8 @@ export const updateVotes = (review_id, voteIncrement) => {
     return ncGamesAPI.patch(`/reviews/${review_id}`, {inc_votes: `${voteIncrement}`})
         .then(({data})=>{return data})
 }
+
+export const updateCommentVotes = (comment_id, voteIncrement) => {
+    return ncGamesAPI.patch(`/comments/${comment_id}`, {inc_votes: `${voteIncrement}`})
+        .then(({data})=>{return data})
+}

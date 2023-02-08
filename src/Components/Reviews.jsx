@@ -34,6 +34,7 @@ export const Reviews = ({categories, setCategories}) => {
                 return review
             })
         })
+        setErrorMessage({display: "none"})
         updateVotes(review_id, Number(e))
         .catch((err)=>{
             console.log(err);
@@ -71,8 +72,9 @@ export const Reviews = ({categories, setCategories}) => {
                         <p>Number of Comments: {review.comment_count}</p>
                     </article>
                     </Link>
-                    <button value={1} onClick={(e) => updateVoteButton(review.review_id, e.target.value)}>+1 Vote</button>
-                    <button value={-1} onClick={(e) => updateVoteButton(review.review_id, e.target.value)}>-1 Vote</button>
+                    <button value={1} onClick={(e) => updateVoteButton(review.review_id, e.target.value)}>Vote: +1</button> 
+                    {/* for accessibility put thumbs up/down for +1 or -1 */}
+                    <button value={-1} onClick={(e) => updateVoteButton(review.review_id, e.target.value)}>Vote: -1</button>
                     
     
                     <p style={errorMessage}>Error updating review votes</p>
