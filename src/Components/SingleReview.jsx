@@ -23,7 +23,8 @@ export const SingleReview = ({currentReview, setCurrentReview}) => {
         setIsLoading(false)
     },[currentReview])
 
-    if(isLoading) return <p>Loading results...</p>
+    if(isLoading) return <p>Loading review...</p>
+    //set up error page that takes error code from API
 
      return (
      
