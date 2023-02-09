@@ -3,19 +3,29 @@ import { useParams } from 'react-router-dom'
 import { getReviewById } from '../Utils/api';
 import { dateConverter } from '../Utils/utils';
 import { Comments } from './Comments';
+import { ErrorPage } from './ErrorPage';
 
 import styles from '../CSS/SingleReview.module.css'
 
 export const SingleReview = ({currentReview, setCurrentReview}) => {
    const { reviewid } = useParams();
    const [newTime, setNewTime] = useState("")
-  
-   const [isLoading, setIsLoading] = useState(true);
+   const [err, setErr] = useState(null)
+   const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(()=>{
-        getReviewById(+reviewid)
-        .then(({data}) => setCurrentReview(data.reviewObj[0]))
-    },[])
+   useEffect(()=>{
+    setIsLoading(true)
+    getReviewById(+reviewid)
+    .then(({data}) => {
+        setCurrentReview(data.reviewObj[0])
+        setIsLoading(false)
+    })
+    .catch((err)=>{
+        console.log(err);
+        setErr(err);
+        setIsLoading(false);
+    })
+},[currentReview, isLoading])
     
     useEffect(()=>{
         const changeDateFormat = dateConverter(currentReview.created_at);
@@ -25,6 +35,10 @@ export const SingleReview = ({currentReview, setCurrentReview}) => {
 
     if(isLoading) return <p>Loading review...</p>
     //set up error page that takes error code from API
+
+    if (err) {
+        return <ErrorPage err={err}/>
+    }
 
      return (
      

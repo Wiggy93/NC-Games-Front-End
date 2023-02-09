@@ -1,7 +1,7 @@
-const ErrorPage = () => {
+export const ErrorPage = ({err}) => {
     return (
         <section>
-            <p>holding error</p>
+            <p>{err.response.data.message}</p>
         </section>
     )
 }

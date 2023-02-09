@@ -1,5 +1,6 @@
 import {AddComment} from './AddComment';
 import {RemoveComment} from './RemoveComment'
+import { ErrorPage } from './ErrorPage';
 import { getCommentsById, updateCommentVotes } from '../Utils/api';
 import { dateConverter } from '../Utils/utils';
 import { useEffect, useState } from 'react';
@@ -10,13 +11,21 @@ export const Comments = ({currentUser, setCurrentUser}) => {
     const { reviewid } = useParams();
     const [allComments, setAllComments] = useState([]);
     const [errorMessage, setErrorMessage] = useState({display: "none"})
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
+    const [err, setErr] = useState(null)
     
   
 
     useEffect(()=>{
-        getCommentsById(reviewid).then((data)=>{
+        setIsLoading(true);
+        getCommentsById(reviewid)
+        .then((data)=>{
             setAllComments(data.comments);
+            setIsLoading(false);
+        })
+        .catch((err)=>{
+            console.log(err);
+            setErr(err);
             setIsLoading(false);
         })
     },[])
@@ -49,6 +58,17 @@ export const Comments = ({currentUser, setCurrentUser}) => {
 
     if(isLoading) return <p>Loading results...</p>
 
+    if ( allComments.length === 0) {
+        return (
+            <section>
+                <p>No comments yet for this review</p>
+                <AddComment className={styles.postComment} setAllComments={setAllComments} allComments={allComments} currentUser={currentUser}/>
+            </section>
+        )
+    } else if (err){
+        return <ErrorPage err={err}/>
+    }
+
     return (
         <section >
             <div className='ol'>
@@ -67,7 +87,7 @@ export const Comments = ({currentUser, setCurrentUser}) => {
                     )
                 })}
             </div>
-            <AddComment className={styles.postComment} setAllComments={setAllComments} allComments={allComments} currentUser={currentUser} setCurrentUser={setCurrentUser}/>
+            <AddComment className={styles.postComment} setAllComments={setAllComments} allComments={allComments} currentUser={currentUser}/>
             <RemoveComment allComments={allComments}/>
            
         </section>
