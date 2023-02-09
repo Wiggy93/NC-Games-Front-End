@@ -7,7 +7,7 @@ import { ErrorPage } from './ErrorPage';
 
 import styles from '../CSS/SingleReview.module.css'
 
-export const SingleReview = ({currentReview, setCurrentReview}) => {
+export const SingleReview = ({currentReview, setCurrentReview, currentUser}) => {
    const { reviewid } = useParams();
    const [newTime, setNewTime] = useState("")
    const [err, setErr] = useState(null)
@@ -25,7 +25,7 @@ export const SingleReview = ({currentReview, setCurrentReview}) => {
         setErr(err);
         setIsLoading(false);
     })
-},[currentReview, isLoading])
+},[])
     
     useEffect(()=>{
         const changeDateFormat = dateConverter(currentReview.created_at);
@@ -34,7 +34,6 @@ export const SingleReview = ({currentReview, setCurrentReview}) => {
     },[currentReview])
 
     if(isLoading) return <p>Loading review...</p>
-    //set up error page that takes error code from API
 
     if (err) {
         return <ErrorPage err={err}/>
@@ -51,9 +50,7 @@ export const SingleReview = ({currentReview, setCurrentReview}) => {
 
             <p id={styles.body} className={styles.gridItem}>{currentReview.review_body} </p>
            
-           
-           
-           <Comments />
+           <Comments currentUser={currentUser}/>
         </section>
     )
 }

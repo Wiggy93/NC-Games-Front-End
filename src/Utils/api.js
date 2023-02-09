@@ -29,6 +29,7 @@ export const updateCommentVotes = (comment_id, voteIncrement) => {
 }
 
 export const postComment = (review_id, commentBody) => {
+    console.log(typeof +review_id, commentBody, "API")
     return ncGamesAPI.post(`reviews/${review_id}/comments`, commentBody)
         .then(({data})=>{return data})
 }
