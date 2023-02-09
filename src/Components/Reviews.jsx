@@ -9,13 +9,15 @@ import { dateConverter } from '../Utils/utils';
 
 export const Reviews = ({categories, setCategories}) => {
     const [reviews, setReviews] = useState([])
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState({display: "none"})
 
     
 
     useEffect(()=>{
-        getReviews().then((data)=>{
+        setIsLoading(true);
+        getReviews()
+        .then((data)=>{
             setReviews(data.reviews);
             setIsLoading(false);
         })
