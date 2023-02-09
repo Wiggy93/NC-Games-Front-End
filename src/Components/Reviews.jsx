@@ -67,6 +67,7 @@ export const Reviews = ({categories, setCategories}) => {
                         <h2>{review.title}</h2>
                         <h3>{review.owner}</h3>
                         <p>{dateConverter(review.created_at)}</p>
+                        <h4>Category: {review.category}</h4>
                         <p className={styles.singleReviewBody}>{review.review_body}</p>
                         <p>Votes: {review.votes}</p>
                         <p>Number of Comments: {review.comment_count}</p>

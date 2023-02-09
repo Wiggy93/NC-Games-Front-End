@@ -12,20 +12,20 @@ export const Categories = ({categories, setCategories}) => {
     },[])
 
     return (
-        <section>
+        <section className={styles.section}>
             <h2>Game Categories</h2>
-            <ul>
+            <div className={styles.categoriesBox}>
                 {categories.map((category)=>{
                     return (
-                        <Link key={category.slug} to={`/reviews/?category=${category.slug}`}>
-                            <h3>{category.slug}</h3>
+                        <Link className={styles.singleCategory} key={category.slug} to={`/reviews/?category=${category.slug}`}>
+                            <h3>{category.slug} games</h3>
                             <br></br>
                             <p>{category.description}</p>
                         </Link>
                         
                     )   
                 })}
-            </ul>
+            </div>
         </section>
     )
 }
