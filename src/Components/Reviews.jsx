@@ -7,7 +7,7 @@ import styles from '../CSS/Reviews.module.css'
 import { dateConverter } from '../Utils/utils';
 
 
-export const Reviews = ({categories, setCategories}) => {
+export const Reviews = ({categories, setCategories, searchCategory, setSearchCategory}) => {
     const [reviews, setReviews] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     const [errorMessage, setErrorMessage] = useState({display: "none"})
@@ -15,13 +15,24 @@ export const Reviews = ({categories, setCategories}) => {
     
 
     useEffect(()=>{
-        getReviews().then((data)=>{
+       getReviews(searchCategory)
+      
+        .then((data)=>{
             setReviews(data.reviews);
             setIsLoading(false);
+            setSearchCategory(undefined)
         })
     },[])
 
-  
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        getReviews()
+        .then((data)=>{
+            setReviews(data.reviews);
+            setIsLoading(false);
+            setSearchCategory(undefined)
+        })
+    }
 
     if(isLoading) return <p>Loading results...</p>
 
@@ -53,6 +64,7 @@ export const Reviews = ({categories, setCategories}) => {
     return (
     <main>
         <ReviewQueries setReviews={setReviews} setCategories={setCategories}/>
+        <button onClick={handleSubmit}>Clear filters</button>
         <ul className={styles.reviewsBox}>
                 {reviews.map((review)=>{
                 return (

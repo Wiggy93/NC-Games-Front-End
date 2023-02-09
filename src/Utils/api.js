@@ -4,8 +4,14 @@ const ncGamesAPI = axios.create({
     baseURL: "https://games-reviews-and-comments.onrender.com/api/"
 })
 
-export const getReviews = () => {
-    return ncGamesAPI.get('/reviews').then(({data})=>{return data})
+export const getReviews = (category, sortBy, order) => {
+    return ncGamesAPI.get('/reviews', {
+        params: {
+            category: category,
+            sort_by: sortBy,
+            order: order
+        }
+    }).then(({data})=>{return data})
 }
 
 export const getReviewById = (review_id) => {
