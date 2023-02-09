@@ -16,7 +16,7 @@ export const SingleReview = ({currentReview, setCurrentReview, currentUser}) => 
 
    useEffect(()=>{
     setIsLoading(true)
-    getReviewById(+reviewid)
+    getReviewById(Number(reviewid))
     .then(({data}) => {
         setCurrentReview(data.reviewObj[0])
         setIsLoading(false)
@@ -29,6 +29,7 @@ export const SingleReview = ({currentReview, setCurrentReview, currentUser}) => 
     },[currentReview])
     
     useEffect(()=>{
+        setIsLoading(true)
         const changeDateFormat = dateConverter(currentReview.created_at);
         setNewTime(changeDateFormat)
         setIsLoading(false)
