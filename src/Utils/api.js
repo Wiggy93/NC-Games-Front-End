@@ -19,7 +19,9 @@ export const getReviewById = (review_id) => {
 }
 
 export const getCommentsById = (review_id) => {
-    return ncGamesAPI.get(`/reviews/${review_id}/comments`).then(({data})=>{return data})
+    return ncGamesAPI.get(`/reviews/${review_id}/comments`).then(({data})=>{
+        return data
+    })
 }
 
 export const updateVotes = (review_id, voteIncrement) => {
@@ -34,4 +36,9 @@ export const updateCommentVotes = (comment_id, voteIncrement) => {
 
 export const getCategories = () => {
     return ncGamesAPI.get('/categories').then(({data})=>{return data})
+}
+
+export const postComment = (review_id, commentBody) => {
+    return ncGamesAPI.post(`reviews/${review_id}/comments`, commentBody)
+        .then(({data})=>{return data})
 }

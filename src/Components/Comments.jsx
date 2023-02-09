@@ -7,14 +7,14 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
 import styles from '../CSS/Comments.module.css'
 
-export const Comments = ({currentReview, setCommentCount}) => {
+export const Comments = ({currentUser}) => {
     const { reviewid } = useParams();
     const [allComments, setAllComments] = useState([]);
     const [errorMessage, setErrorMessage] = useState({display: "none"})
+    const [message, setMessage] = useState("");
+    const [postedMessage, setPostedMessage] = useState({display: "none"})
     const [isLoading, setIsLoading] = useState(false);
     const [err, setErr] = useState(null)
-    
-  
 
     useEffect(()=>{
         setIsLoading(true);
@@ -28,7 +28,7 @@ export const Comments = ({currentReview, setCommentCount}) => {
             setErr(err);
             setIsLoading(false);
         })
-    },[])
+    },[message])
     
     const updateVoteButton = (comment_id, e) =>{
         setAllComments((currentComments)=>{
@@ -56,9 +56,16 @@ export const Comments = ({currentReview, setCommentCount}) => {
         })
     }
 
-    if(isLoading) return <p>Loading results...</p>
+    if(isLoading) return <p>Loading comments...</p>
 
-    if (err) {
+    if ( allComments.length === 0) {
+        return (
+            <section>
+                <p>No comments yet for this review</p>
+                <AddComment className={styles.postComment}  currentUser={currentUser} message={message} setMessage={setMessage} setPostedMessage={setPostedMessage}/>
+            </section>
+        )
+    } else if (err){
         return <ErrorPage err={err}/>
     }
 
@@ -74,14 +81,16 @@ export const Comments = ({currentReview, setCommentCount}) => {
                             <p>Votes: {comment.votes}</p>
                             <button value={1} onClick={(e) => updateVoteButton(comment.comment_id, e.target.value)}>Vote: +1</button>
                             {/* for accessibility put thumbs up/down for +1 or -1 */}
-                            <button value={-1} onClick={(e) => updateVoteButton(comment.comment_id, e.target.value)}>-Vote: -1</button>
+                            <button value={-1} onClick={(e) => updateVoteButton(comment.comment_id, e.target.value)}>Vote: -1</button>
                             <p style={errorMessage}>Error updating comment votes</p>
                         </article>
                     )
                 })}
             </div>
+            <AddComment className={styles.postComment} currentUser={currentUser} message={message} setMessage={setMessage} setPostedMessage={setPostedMessage}/>
+            <p style={postedMessage}>Posted Comment!</p>
             <RemoveComment allComments={allComments}/>
-            <AddComment setAllComments={setAllComments} allComments={allComments} setCommentCount={setCommentCount}/>
+           
         </section>
     )
 }

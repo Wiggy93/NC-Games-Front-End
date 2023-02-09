@@ -9,7 +9,7 @@ import { dateConverter } from '../Utils/utils';
 
 export const Reviews = ({categories, setCategories, searchCategory, setSearchCategory}) => {
     const [reviews, setReviews] = useState([])
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState({display: "none"})
 
     

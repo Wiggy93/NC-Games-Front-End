@@ -1,0 +1,8 @@
+.postComment {
+    grid-row: 9/10;
+    grid-column: 1 / 3;
+}
+
+.postBody{
+    overflow: auto;
+}
