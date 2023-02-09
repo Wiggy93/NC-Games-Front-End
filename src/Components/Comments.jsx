@@ -1,5 +1,6 @@
 import {AddComment} from './AddComment';
 import {RemoveComment} from './RemoveComment'
+import { ErrorPage } from './ErrorPage';
 import { getCommentsById, updateCommentVotes } from '../Utils/api';
 import { dateConverter } from '../Utils/utils';
 import { useEffect, useState } from 'react';
@@ -10,13 +11,21 @@ export const Comments = ({currentReview, setCommentCount}) => {
     const { reviewid } = useParams();
     const [allComments, setAllComments] = useState([]);
     const [errorMessage, setErrorMessage] = useState({display: "none"})
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
+    const [err, setErr] = useState(null)
     
   
 
     useEffect(()=>{
-        getCommentsById(reviewid).then((data)=>{
+        setIsLoading(true);
+        getCommentsById(reviewid)
+        .then((data)=>{
             setAllComments(data.comments);
+            setIsLoading(false);
+        })
+        .catch((err)=>{
+            console.log(err);
+            setErr(err);
             setIsLoading(false);
         })
     },[])
@@ -48,6 +57,10 @@ export const Comments = ({currentReview, setCommentCount}) => {
     }
 
     if(isLoading) return <p>Loading results...</p>
+
+    if (err) {
+        return <ErrorPage err={err}/>
+    }
 
     return (
         <section >
