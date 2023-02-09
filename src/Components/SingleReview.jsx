@@ -3,25 +3,41 @@ import { useParams } from 'react-router-dom'
 import { getReviewById } from '../Utils/api';
 import { dateConverter } from '../Utils/utils';
 import { Comments } from './Comments';
+import { ErrorPage } from './ErrorPage';
 import styles from '../CSS/SingleReview.module.css'
 
 export const SingleReview = ({currentReview, setCurrentReview}) => {
    const { reviewid } = useParams();
    const [newTime, setNewTime] = useState("")
-   const [isLoading, setIsLoading] = useState(true);
+   const [isLoading, setIsLoading] = useState(false);
+   const [err, setErr] = useState(null)
 
     useEffect(()=>{
+        setIsLoading(true)
         getReviewById(+reviewid)
-        .then(({data}) => setCurrentReview(data.reviewObj[0]))
-    },[])
+        .then(({data}) => {
+            setCurrentReview(data.reviewObj[0])
+            setIsLoading(false)
+        })
+        .catch((err)=>{
+            console.log(err);
+            setErr(err);
+            setIsLoading(false);
+        })
+    },[currentReview, isLoading])
     
     useEffect(()=>{
+        setIsLoading(true)
         const changeDateFormat = dateConverter(currentReview.created_at);
         setNewTime(changeDateFormat)
         setIsLoading(false)
     },[currentReview])
 
     if(isLoading) return <p>Loading results...</p>
+
+    if (err) {
+        return <ErrorPage err={err}/>
+    }
 
      return (
      

@@ -24,9 +24,7 @@ function App() {
       </header>
         <Routes>       
           <Route path='/categories' element={<Categories categories={categories} setCategories={setCategories}/>}></Route>
-          <Route path='/reviews/*' element={<Reviews 
-          categories={categories} 
-          setCategories={setCategories}
+          <Route path='/reviews/*' element={<Reviews categories={categories} setCategories={setCategories}
           />}></Route>
           <Route path='users' element={<Users/>}></Route>
           <Route path='/reviews/:reviewid' element={<SingleReview currentReview={currentReview} setCurrentReview={setCurrentReview}/>}></Route>

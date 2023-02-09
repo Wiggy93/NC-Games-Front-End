@@ -1,6 +1,7 @@
 import {AddComment} from './AddComment';
 import {RemoveComment} from './RemoveComment'
-import { getCommentsById } from '../Utils/api';
+import { ErrorPage } from './ErrorPage';
+import { getCommentsById, updateCommentVotes } from '../Utils/api';
 import { dateConverter } from '../Utils/utils';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
@@ -9,16 +10,57 @@ import styles from '../CSS/Comments.module.css'
 export const Comments = ({currentReview, setCommentCount}) => {
     const { reviewid } = useParams();
     const [allComments, setAllComments] = useState([]);
+    const [errorMessage, setErrorMessage] = useState({display: "none"})
+    const [isLoading, setIsLoading] = useState(false);
+    const [err, setErr] = useState(null)
     
   
 
     useEffect(()=>{
-        getCommentsById(reviewid).then((data)=>{
-            setAllComments(data.comments)
-            console.log(data.comments, "<<<comments");
+        setIsLoading(true);
+        getCommentsById(reviewid)
+        .then((data)=>{
+            setAllComments(data.comments);
+            setIsLoading(false);
+        })
+        .catch((err)=>{
+            console.log(err);
+            setErr(err);
+            setIsLoading(false);
         })
     },[])
     
+    const updateVoteButton = (comment_id, e) =>{
+        setAllComments((currentComments)=>{
+            return currentComments.map((comment)=>{
+                if (comment.comment_id === comment_id) {
+                    return {...comment, votes: comment.votes + Number(e)}
+                }
+                return comment
+            })
+        })
+       
+        setErrorMessage({display: "none"})
+        updateCommentVotes(comment_id, Number(e))
+        .catch((err)=>{
+            console.log(err);
+            setAllComments((currentComments)=>{
+                return currentComments.map((comment)=>{
+                    if (comment.comment_id === comment_id) {
+                        return {...comment, votes: comment.votes - Number(e)}
+                    }
+                    return comment
+                })
+            })
+            setErrorMessage({display: "block" })
+        })
+    }
+
+    if(isLoading) return <p>Loading results...</p>
+
+    if (err) {
+        return <ErrorPage err={err}/>
+    }
 
     return (
         <section >
@@ -29,6 +71,11 @@ export const Comments = ({currentReview, setCommentCount}) => {
                             <p>Written by {comment.author} on {dateConverter(comment.created_at)}</p>
                             <br></br>
                             <p>{comment.body}</p>
+                            <p>Votes: {comment.votes}</p>
+                            <button value={1} onClick={(e) => updateVoteButton(comment.comment_id, e.target.value)}>Vote: +1</button>
+                            {/* for accessibility put thumbs up/down for +1 or -1 */}
+                            <button value={-1} onClick={(e) => updateVoteButton(comment.comment_id, e.target.value)}>-Vote: -1</button>
+                            <p style={errorMessage}>Error updating comment votes</p>
                         </article>
                     )
                 })}
