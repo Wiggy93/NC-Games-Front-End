@@ -33,7 +33,7 @@ export const ReviewQueries = ({setCategories, categories, setSortBy, setCategory
     }
 
     return (
-        <section>
+        <section className={styles.querySection}>
             <form >
                 <select
                     name="select-category"

@@ -6,7 +6,7 @@ import {Users} from './Components/Users'
 import { NavBar } from './Components/NavBar';
 import { Comments } from './Components/Comments';
 
-import {Routes, Route} from 'react-router-dom'
+import {Routes, Route, Link} from 'react-router-dom'
 import { useState } from 'react';
 import { SingleReview } from './Components/SingleReview';
 
@@ -24,6 +24,11 @@ function App() {
       <header>
         <h1>The BoardGamer</h1>
       </header>
+      <h2>Source of all your board game reviews, gossip and fierce debate over which is the ultimate board game</h2>
+
+      <Link to={"/reviews"}>Find the reviews</Link>
+      
+
         <Routes>       
           <Route path='/categories' element={<Categories 
           categories={categories} 
