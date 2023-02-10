@@ -3,7 +3,7 @@ import {ReviewQueries} from './ReviewQueries';
 import { ErrorPage } from "./ErrorPage";
 import {getReviews, updateVotes } from '../Utils/api';
 import {Link, useNavigate, useSearchParams} from 'react-router-dom'
-import {Link, useNavigate, useSearchParams} from 'react-router-dom'
+
 
 import styles from '../CSS/Reviews.module.css'
 import { dateConverter } from '../Utils/utils';
