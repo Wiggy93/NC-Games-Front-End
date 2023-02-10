@@ -95,6 +95,7 @@ export const Reviews = ({categories, setCategories}) => {
                         <h3>{review.owner}</h3>
                         <p>{dateConverter(review.created_at)}</p>
                         <h4>Category: {review.category}</h4>
+                        <p>Game designer: {review.designer}</p>
                         <p className={styles.singleReviewBody}>{review.review_body}</p>
                         <p>Votes: {review.votes}</p>
                         <p>Number of Comments: {review.comment_count}</p>
