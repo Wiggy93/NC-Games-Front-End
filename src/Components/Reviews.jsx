@@ -3,6 +3,7 @@ import {ReviewQueries} from './ReviewQueries';
 import { ErrorPage } from "./ErrorPage";
 import {getReviews, updateVotes } from '../Utils/api';
 import {Link, useNavigate, useSearchParams} from 'react-router-dom'
+import {Link, useNavigate, useSearchParams} from 'react-router-dom'
 
 import styles from '../CSS/Reviews.module.css'
 import { dateConverter } from '../Utils/utils';
@@ -69,11 +70,14 @@ export const Reviews = ({categories, setCategories, category, setCategory}) => {
         })
         .then(()=>{
             navigate('/reviews')
+            setResetFilters(false)
+        })
+        .then(()=>{
+            navigate('/reviews')
         })
     }
-  
 
-    if(isLoading) return <p>Loading results...</p>
+    if(isLoading) return <p>Loading reviews...</p>
 
     const updateVoteButton = (review_id, e) =>{
         setReviews((currentReviews)=>{
