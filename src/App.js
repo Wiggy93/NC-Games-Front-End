@@ -24,9 +24,16 @@ function App() {
         <h1>The BoardGamer</h1>
       </header>
         <Routes>       
-          <Route path='/categories' element={<Categories categories={categories} setCategories={setCategories} setSearchCategory={setSearchCategory}  searchCategory={searchCategory} />}></Route>
-          <Route path='/reviews/' element={<Reviews categories={categories} setCategories={setCategories}  searchCategory={searchCategory} setSearchCategory={setSearchCategory}
+          <Route path='/categories' element={<Categories 
+          categories={categories} 
+          setCategories={setCategories} 
+         />}></Route>
+         
+          <Route path='/reviews/' element={<Reviews 
+          categories={categories} 
+          setCategories={setCategories}  
           />}></Route>
+          
           <Route path='users' element={<Users/>}></Route>
           <Route path='/reviews/:reviewid' element={<SingleReview currentReview={currentReview} setCurrentReview={setCurrentReview} currentUser={currentUser}/>}></Route>
           <Route path='/reviews/:reviewid/comments' element={<Comments/>}></Route>

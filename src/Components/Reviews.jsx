@@ -1,38 +1,48 @@
 import { useEffect, useState } from 'react';
 import {ReviewQueries} from './ReviewQueries';
 import {getReviews, updateVotes } from '../Utils/api';
-import {Link} from 'react-router-dom'
+import {Link, useNavigate, useSearchParams} from 'react-router-dom'
 
 import styles from '../CSS/Reviews.module.css'
 import { dateConverter } from '../Utils/utils';
 
 
-export const Reviews = ({categories, setCategories, searchCategory, setSearchCategory}) => {
+export const Reviews = ({categories, setCategories}) => {
     const [reviews, setReviews] = useState([])
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState({display: "none"})
+    let [searchParams, setSearchParams] = useSearchParams();
+    const [resetFilters, setResetFilters] = useState(false)
+   
+    const navigate = useNavigate();
 
-    
+    let categoryQuery = searchParams.get("category")
+
 
     useEffect(()=>{
-    setIsLoading(true);
-       getReviews(searchCategory)
-      
+        setIsLoading(true);
+        if (resetFilters === true) {
+            categoryQuery = undefined;
+        }
+        getReviews(categoryQuery)     
         .then((data)=>{
             setReviews(data.reviews);
             setIsLoading(false);
-            setSearchCategory(undefined)
         })
-    },[])
+    },[resetFilters])
 
     const handleSubmit = (event) => {
         event.preventDefault();
         setIsLoading(true);
+        setResetFilters(true)
         getReviews()
         .then((data)=>{
             setReviews(data.reviews);
             setIsLoading(false);
-            setSearchCategory(undefined)
+            setResetFilters(false)
+        })
+        .then(()=>{
+            navigate('/reviews')
         })
     }
 
@@ -66,7 +76,7 @@ export const Reviews = ({categories, setCategories, searchCategory, setSearchCat
     return (
     <main>
         <ReviewQueries setReviews={setReviews} setCategories={setCategories}/>
-        <Link to={'/reviews'}>
+        <Link to={'/reviews/'}>
             <h2 onClick={handleSubmit}>Clear filters</h2>
         </Link>
         

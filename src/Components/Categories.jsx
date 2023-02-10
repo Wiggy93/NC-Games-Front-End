@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { getCategories } from "../Utils/api"
 import styles from "../CSS/Categories.module.css"
 
-export const Categories = ({categories, setCategories, setSearchCategory, searchCategory}) => {
+export const Categories = ({categories, setCategories}) => {
     const [isLoading, setIsLoading] = useState(false);
     
     useEffect(()=>{
@@ -25,10 +25,7 @@ export const Categories = ({categories, setCategories, setSearchCategory, search
                         <Link 
                         className={styles.singleCategory} 
                         key={category.slug} 
-                        to={`/reviews/`}
-                        onClick={()=>{
-                            setSearchCategory(category.slug)
-                        }}
+                        to={`/reviews/?category=${category.slug}`}
                         >
                             <h3>{category.slug} games</h3>
                             <br></br>
