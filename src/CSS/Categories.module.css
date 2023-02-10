@@ -1,0 +1,27 @@
+.section {
+    background-color: #E5E0FF;
+}
+
+.categoriesBox {
+    background-color: #E5E0FF;
+    display: flex;
+    height: auto;
+    flex-flow: wrap;
+    justify-content: space-around;
+    margin: 0px;
+
+}
+
+.singleCategory {
+    margin: 3%;
+    padding: 1%;
+    background-color: #FFF2F2;
+    color: #1639c4;
+    border-radius: 5px;
+    border: 2px solid #4a66d8;
+    width: 300px;
+    height: auto;
+    text-decoration: none;
+    /* overflow: scroll; */
+
+}

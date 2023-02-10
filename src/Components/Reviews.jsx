@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import {ReviewQueries} from './ReviewQueries';
 import {getReviews, updateVotes } from '../Utils/api';
-import {Link} from 'react-router-dom'
+import {Link, useNavigate, useSearchParams} from 'react-router-dom'
 
 import styles from '../CSS/Reviews.module.css'
 import { dateConverter } from '../Utils/utils';
@@ -11,21 +11,42 @@ export const Reviews = ({categories, setCategories}) => {
     const [reviews, setReviews] = useState([])
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState({display: "none"})
+    let [searchParams, setSearchParams] = useSearchParams();
+    const [resetFilters, setResetFilters] = useState(false)
+   
+    const navigate = useNavigate();
 
-    
+    let categoryQuery = searchParams.get("category")
+
 
     useEffect(()=>{
         setIsLoading(true);
-        getReviews()
+        if (resetFilters === true) {
+            categoryQuery = undefined;
+        }
+        getReviews(categoryQuery)     
         .then((data)=>{
             setReviews(data.reviews);
             setIsLoading(false);
         })
-    },[])
+    },[resetFilters])
 
-  
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        setIsLoading(true);
+        setResetFilters(true)
+        getReviews()
+        .then((data)=>{
+            setReviews(data.reviews);
+            setIsLoading(false);
+            setResetFilters(false)
+        })
+        .then(()=>{
+            navigate('/reviews')
+        })
+    }
 
-    if(isLoading) return <p>Loading results...</p>
+    if(isLoading) return <p>Loading reviews...</p>
 
     const updateVoteButton = (review_id, e) =>{
         setReviews((currentReviews)=>{
@@ -55,6 +76,10 @@ export const Reviews = ({categories, setCategories}) => {
     return (
     <main>
         <ReviewQueries setReviews={setReviews} setCategories={setCategories}/>
+        <Link to={'/reviews/'}>
+            <h2 onClick={handleSubmit}>Clear filters</h2>
+        </Link>
+        
         <ul className={styles.reviewsBox}>
                 {reviews.map((review)=>{
                 return (
@@ -69,6 +94,7 @@ export const Reviews = ({categories, setCategories}) => {
                         <h2>{review.title}</h2>
                         <h3>{review.owner}</h3>
                         <p>{dateConverter(review.created_at)}</p>
+                        <h4>Category: {review.category}</h4>
                         <p className={styles.singleReviewBody}>{review.review_body}</p>
                         <p>Votes: {review.votes}</p>
                         <p>Number of Comments: {review.comment_count}</p>
