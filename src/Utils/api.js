@@ -4,8 +4,14 @@ const ncGamesAPI = axios.create({
     baseURL: "https://games-reviews-and-comments.onrender.com/api/"
 })
 
-export const getReviews = () => {
-    return ncGamesAPI.get('/reviews').then(({data})=>{return data})
+export const getReviews = (category, sortBy, order) => {
+    return ncGamesAPI.get('/reviews', {
+        params: {
+            category: category,
+            sort_by: sortBy,
+            order: order
+        }
+    }).then(({data})=>{return data})
 }
 
 export const getReviewById = (review_id) => {
@@ -26,6 +32,10 @@ export const updateVotes = (review_id, voteIncrement) => {
 export const updateCommentVotes = (comment_id, voteIncrement) => {
     return ncGamesAPI.patch(`/comments/${comment_id}`, {inc_votes: `${voteIncrement}`})
         .then(({data})=>{return data})
+}
+
+export const getCategories = () => {
+    return ncGamesAPI.get('/categories').then(({data})=>{return data})
 }
 
 export const postComment = (review_id, commentBody) => {
