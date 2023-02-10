@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { getCategories } from "../Utils/api"
 import styles from "../CSS/Categories.module.css"
 
-export const Categories = ({categories, setCategories}) => {
+export const Categories = ({categories, setCategories, setCategory}) => {
     const [isLoading, setIsLoading] = useState(false);
     
     useEffect(()=>{
@@ -22,10 +22,17 @@ export const Categories = ({categories, setCategories}) => {
             <div className={styles.categoriesBox}>
                 {categories.map((category)=>{
                     return (
+                    
                         <Link 
                         className={styles.singleCategory} 
                         key={category.slug} 
                         to={`/reviews/?category=${category.slug}`}
+                        // to={`/reviews/`}
+                        value={category.slug}
+                        // onClick={(e)=> {
+                        //     console.log(e.target.innerHTML)
+                        //     setCategory(e.target.value)
+                        // }}
                         >
                             <h3>{category.slug} games</h3>
                             <br></br>
