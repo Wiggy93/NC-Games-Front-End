@@ -15,6 +15,7 @@ export const Reviews = ({categories, setCategories, searchCategory, setSearchCat
     
 
     useEffect(()=>{
+    setIsLoading(true);
        getReviews(searchCategory)
       
         .then((data)=>{
@@ -26,6 +27,7 @@ export const Reviews = ({categories, setCategories, searchCategory, setSearchCat
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setIsLoading(true);
         getReviews()
         .then((data)=>{
             setReviews(data.reviews);
@@ -34,7 +36,7 @@ export const Reviews = ({categories, setCategories, searchCategory, setSearchCat
         })
     }
 
-    if(isLoading) return <p>Loading results...</p>
+    if(isLoading) return <p>Loading reviews...</p>
 
     const updateVoteButton = (review_id, e) =>{
         setReviews((currentReviews)=>{
@@ -64,7 +66,10 @@ export const Reviews = ({categories, setCategories, searchCategory, setSearchCat
     return (
     <main>
         <ReviewQueries setReviews={setReviews} setCategories={setCategories}/>
-        <button onClick={handleSubmit}>Clear filters</button>
+        <Link to={'/reviews'}>
+            <h2 onClick={handleSubmit}>Clear filters</h2>
+        </Link>
+        
         <ul className={styles.reviewsBox}>
                 {reviews.map((review)=>{
                 return (

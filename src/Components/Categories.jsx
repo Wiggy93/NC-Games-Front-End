@@ -1,15 +1,20 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { getCategories } from "../Utils/api"
 import styles from "../CSS/Categories.module.css"
 
 export const Categories = ({categories, setCategories, setSearchCategory, searchCategory}) => {
+    const [isLoading, setIsLoading] = useState(false);
     
     useEffect(()=>{
+        setIsLoading(true);
         getCategories().then((data)=>{
             setCategories(data.categories)
+            setIsLoading(false);
         })
     },[])
+
+    if(isLoading) return <p>Loading categories...</p>
 
     return (
         <section className={styles.section}>
@@ -20,10 +25,9 @@ export const Categories = ({categories, setCategories, setSearchCategory, search
                         <Link 
                         className={styles.singleCategory} 
                         key={category.slug} 
-                        to={`/reviews/?category=${category.slug}`}
+                        to={`/reviews/`}
                         onClick={()=>{
                             setSearchCategory(category.slug)
-                            console.log(searchCategory)
                         }}
                         >
                             <h3>{category.slug} games</h3>
