@@ -14,6 +14,7 @@ function App() {
   const [categories, setCategories] = useState([]);
   const [currentUser, setCurrentUser] = useState('tickle122')
   const [currentReview, setCurrentReview] = useState({})
+  const [category, setCategory] = useState(undefined)
 
   return (
     <div className="App">
@@ -23,8 +24,16 @@ function App() {
         <h1>The BoardGamer</h1>
       </header>
         <Routes>       
-          <Route path='/categories' element={<Categories categories={categories} setCategories={setCategories}/>}></Route>
-          <Route path='/reviews/*' element={<Reviews categories={categories} setCategories={setCategories}
+          <Route path='/categories' element={<Categories 
+          categories={categories} 
+          setCategories={setCategories} 
+          setCategory={setCategory}/>}></Route>
+         
+          <Route path='/reviews/*' element={<Reviews 
+          categories={categories} 
+          setCategories={setCategories} 
+          category={category} 
+          setCategory={setCategory}
           />}></Route>
           <Route path='users' element={<Users/>}></Route>
           <Route path='/reviews/:reviewid' element={<SingleReview currentReview={currentReview} setCurrentReview={setCurrentReview} currentUser={currentUser}/>}></Route>
