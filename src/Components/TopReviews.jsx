@@ -16,7 +16,6 @@ export const TopReviews = () => {
     setIsLoading(true);
     getReviews(undefined, "votes", "desc")
       .then((data) => {
-        console.log(data, "get reviews data");
         setTopReviews([data.reviews[0], data.reviews[1], data.reviews[2]]);
         setIsLoading(false);
       })
@@ -24,6 +23,7 @@ export const TopReviews = () => {
         console.log(err);
         setErr(err);
         setIsLoading(false);
+        setErrorMessage({ display: "block" });
       });
   }, []);
 

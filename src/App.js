@@ -14,7 +14,6 @@ import { SingleReview } from "./Components/SingleReview";
 function App() {
   const [categories, setCategories] = useState([]);
   const [currentUser, setCurrentUser] = useState("tickle122");
-  const [searchCategory, setSearchCategory] = useState(undefined);
   const [currentReview, setCurrentReview] = useState({});
   const [category, setCategory] = useState(undefined);
   const [selectedFilterOption, setSelectedFilterOption] = useState(null);
