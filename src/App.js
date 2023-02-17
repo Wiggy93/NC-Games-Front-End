@@ -5,6 +5,7 @@ import { Reviews } from "./Components/Reviews";
 import { Users } from "./Components/Users";
 import { NavBar } from "./Components/NavBar";
 import { Comments } from "./Components/Comments";
+import { TopReviews } from "./Components/TopReviews";
 
 import { Routes, Route, Link } from "react-router-dom";
 import { useState } from "react";
@@ -31,9 +32,15 @@ function App() {
           Source of all your board game reviews, gossip and fierce debate over
           which is the ultimate board game
         </h2>
-
+        <br></br>
+        <br></br>
         <Link to={"/reviews"}>Find the reviews</Link>
-
+        <br></br>
+        <br></br>
+        <h3>Top Reviews</h3>
+        <br></br>
+        <br></br>
+        <TopReviews />
         <Routes>
           <Route
             path="/categories"

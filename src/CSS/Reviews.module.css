@@ -18,6 +18,19 @@
     
 }
 
+
+
+.topSingleReviewBox {
+    color: #4a66d8;
+    width: 300px;
+    height: 130px;
+    margin: 10px;
+    background-color: #FFF2F2;
+    border-radius: 5px;
+    border: 2px solid #4a66d8;
+    padding: 5px;
+}
+
 h2, h3, p {
     text-decoration: none;
 }
