@@ -45,5 +45,5 @@ Node.js : v19.1.0
 
 ### Features coming soon:
 
+Vote only once
 Add new reviews
-Get all users
