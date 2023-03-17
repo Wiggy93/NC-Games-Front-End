@@ -1,3 +1,7 @@
+.section {
+    background-color: #E5E0FF;
+}
+
 .usersBox {
 display: flex;
 height: auto;
