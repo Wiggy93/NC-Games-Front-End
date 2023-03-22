@@ -15,7 +15,8 @@ export const Comments = ({ currentUser }) => {
   const [postedMessage, setPostedMessage] = useState({ display: "none" });
   const [isLoading, setIsLoading] = useState(false);
   const [err, setErr] = useState(null);
-  const [haveVotedIds, setHaveVotedIds] = useState([]);
+  const [haveUpVotedIds, setHaveUpVotedIds] = useState([]);
+  const [haveDownVotedIds, setHaveDownVotedIds] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -41,9 +42,28 @@ export const Comments = ({ currentUser }) => {
       });
     });
 
+    if (Number(e) === 1) {
+      setHaveUpVotedIds([...haveUpVotedIds, comment_id]);
+
+      setHaveDownVotedIds(
+        haveDownVotedIds.filter((number) => {
+          return number !== comment_id;
+        })
+      );
+    }
+
+    if (Number(e) === -1) {
+      setHaveDownVotedIds([...haveDownVotedIds, comment_id]);
+
+      setHaveUpVotedIds([
+        haveUpVotedIds.filter((number) => {
+          return number !== comment_id;
+        }),
+      ]);
+    }
+
     setErrorMessage({ display: "none" });
-    updateCommentVotes(comment_id, Number(e));
-    setHaveVotedIds([...haveVotedIds, comment_id]).catch((err) => {
+    updateCommentVotes(comment_id, Number(e)).catch((err) => {
       console.log(err);
       setAllComments((currentComments) => {
         return currentComments.map((comment) => {
@@ -94,7 +114,7 @@ export const Comments = ({ currentUser }) => {
                 onClick={(e) =>
                   updateVoteButton(comment.comment_id, e.target.value)
                 }
-                disabled={haveVotedIds.includes(comment.comment_id)}
+                disabled={haveUpVotedIds.includes(comment.comment_id)}
               >
                 Vote: +1
               </button>
@@ -104,7 +124,7 @@ export const Comments = ({ currentUser }) => {
                 onClick={(e) =>
                   updateVoteButton(comment.comment_id, e.target.value)
                 }
-                disabled={haveVotedIds.includes(comment.comment_id)}
+                disabled={haveDownVotedIds.includes(comment.comment_id)}
               >
                 Vote: -1
               </button>
