@@ -25,10 +25,8 @@ export const Reviews = ({
   const [err, setErr] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const [resetFilters, setResetFilters] = useState(false);
-  const [haveVotedIds, setHaveVotedIds] = useState([]);
-  const [multipleVoteMessage, setMultipleVoteMessage] = useState({
-    display: "none",
-  });
+  const [haveUpVotedIds, setHaveUpVotedIds] = useState([]);
+  const [haveDownVotedIds, setHaveDownVotedIds] = useState([]);
 
   const [sortBy, setSortBy] = useState(undefined);
   const [orderBy, setOrderBy] = useState("desc");
@@ -98,8 +96,6 @@ export const Reviews = ({
   if (isLoading) return <p>Loading reviews...</p>;
 
   const updateVoteButton = (review_id, e) => {
-    if (haveVotedIds.includes(review_id))
-      setMultipleVoteMessage({ display: "block" });
     setReviews((currentReviews) => {
       return currentReviews.map((review) => {
         if (review.review_id === review_id) {
@@ -108,9 +104,29 @@ export const Reviews = ({
         return review;
       });
     });
+
+    if (Number(e) === 1) {
+      setHaveUpVotedIds([...haveUpVotedIds, review_id]);
+
+      setHaveDownVotedIds(
+        haveDownVotedIds.filter((number) => {
+          return number !== review_id;
+        })
+      );
+    }
+
+    if (Number(e) === -1) {
+      setHaveDownVotedIds([...haveDownVotedIds, review_id]);
+
+      setHaveUpVotedIds([
+        haveUpVotedIds.filter((number) => {
+          return number !== review_id;
+        }),
+      ]);
+    }
+
     setErrorMessage({ display: "none" });
-    updateVotes(review_id, Number(e));
-    setHaveVotedIds([...haveVotedIds, review_id]).catch((err) => {
+    updateVotes(review_id, Number(e)).catch((err) => {
       console.log(err);
       setReviews((currentReviews) => {
         return currentReviews.map((review) => {
@@ -123,6 +139,10 @@ export const Reviews = ({
       setErrorMessage({ display: "block" });
     });
   };
+
+  console.log(haveUpVotedIds, "<<<upvotes");
+  // // console.log(typeof haveDownVotedIds[0]);
+  console.log(haveDownVotedIds, "<<<down votes");
 
   return (
     <main>
@@ -168,7 +188,7 @@ export const Reviews = ({
                 onClick={(e) =>
                   updateVoteButton(review.review_id, e.target.value)
                 }
-                disabled={haveVotedIds.includes(review.review_id)}
+                disabled={haveUpVotedIds.includes(review.review_id)}
               >
                 Vote: +1
               </button>
@@ -178,12 +198,11 @@ export const Reviews = ({
                 onClick={(e) =>
                   updateVoteButton(review.review_id, e.target.value)
                 }
-                disabled={haveVotedIds.includes(review.review_id)}
+                disabled={haveDownVotedIds.includes(review.review_id)}
               >
                 Vote: -1
               </button>
 
-              <p style={multipleVoteMessage}>You can't vote more than once!</p>
               <p style={errorMessage}>Error updating review votes</p>
             </div>
           );

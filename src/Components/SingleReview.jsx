@@ -17,7 +17,8 @@ export const SingleReview = ({
   const [err, setErr] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState({ display: "none" });
-  const [haveVotedIds, setHaveVotedIds] = useState([]);
+  const [haveUpVotedIds, setHaveUpVotedIds] = useState([]);
+  const [haveDownVotedIds, setHaveDownVotedIds] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -45,9 +46,26 @@ export const SingleReview = ({
       return (currentReview.votes = currentReview.votes + Number(e));
     });
 
+    if (Number(e) === 1) {
+      setHaveUpVotedIds([...haveUpVotedIds, review_id]);
+      setHaveDownVotedIds(
+        haveDownVotedIds.filter((number) => {
+          return number !== review_id;
+        })
+      );
+    }
+
+    if (Number(e) === -1) {
+      setHaveDownVotedIds([...haveDownVotedIds, review_id]);
+      setHaveUpVotedIds([
+        haveUpVotedIds.filter((number) => {
+          return number !== review_id;
+        }),
+      ]);
+    }
+
     setErrorMessage({ display: "none" });
-    updateVotes(review_id, Number(e));
-    setHaveVotedIds([...haveVotedIds, review_id]).catch((err) => {
+    updateVotes(review_id, Number(e)).catch((err) => {
       console.log(err);
       setCurrentReview((review) => {
         return (currentReview.votes = currentReview.votes - Number(e));
@@ -97,7 +115,7 @@ export const SingleReview = ({
           onClick={(e) =>
             updateVoteButton(currentReview.review_id, e.target.value)
           }
-          disabled={haveVotedIds.includes(currentReview.review_id)}
+          disabled={haveUpVotedIds.includes(currentReview.review_id)}
         >
           Vote: +1
         </button>
@@ -107,7 +125,7 @@ export const SingleReview = ({
           onClick={(e) =>
             updateVoteButton(currentReview.review_id, e.target.value)
           }
-          disabled={haveVotedIds.includes(currentReview.review_id)}
+          disabled={haveDownVotedIds.includes(currentReview.review_id)}
         >
           Vote: -1
         </button>
