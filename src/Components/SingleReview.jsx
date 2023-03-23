@@ -7,11 +7,7 @@ import { ErrorPage } from "./ErrorPage";
 
 import styles from "../CSS/SingleReview.module.css";
 
-export const SingleReview = ({
-  currentReview,
-  setCurrentReview,
-  currentUser,
-}) => {
+export const SingleReview = ({ currentReview, setCurrentReview }) => {
   const { reviewid } = useParams();
   const [newTime, setNewTime] = useState("");
   const [err, setErr] = useState(null);
@@ -132,7 +128,7 @@ export const SingleReview = ({
       </div>
 
       <p style={errorMessage}>Error updating review votes</p>
-      <Comments currentUser={currentUser} />
+      <Comments />
     </section>
   );
 };

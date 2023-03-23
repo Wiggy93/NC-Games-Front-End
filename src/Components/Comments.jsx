@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "../CSS/Comments.module.css";
 
-export const Comments = ({ currentUser }) => {
+export const Comments = () => {
   const { reviewid } = useParams();
   const [allComments, setAllComments] = useState([]);
   const [errorMessage, setErrorMessage] = useState({ display: "none" });
@@ -85,7 +85,6 @@ export const Comments = ({ currentUser }) => {
         <p>No comments yet for this review</p>
         <AddComment
           className={styles.postComment}
-          currentUser={currentUser}
           message={message}
           setMessage={setMessage}
           setPostedMessage={setPostedMessage}
@@ -135,7 +134,6 @@ export const Comments = ({ currentUser }) => {
       </div>
       <AddComment
         className={styles.postComment}
-        currentUser={currentUser}
         message={message}
         setMessage={setMessage}
         setPostedMessage={setPostedMessage}

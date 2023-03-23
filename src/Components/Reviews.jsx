@@ -140,10 +140,6 @@ export const Reviews = ({
     });
   };
 
-  console.log(haveUpVotedIds, "<<<upvotes");
-  // // console.log(typeof haveDownVotedIds[0]);
-  console.log(haveDownVotedIds, "<<<down votes");
-
   return (
     <main>
       <ReviewQueries

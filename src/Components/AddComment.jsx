@@ -1,26 +1,24 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ErrorPage } from "./ErrorPage";
 import { postComment } from "../Utils/api";
 import styles from "../CSS/AddComment.module.css";
+import { UserContext } from "../Contexts/userContext";
 
-export const AddComment = ({
-  currentUser,
-  setMessage,
-  message,
-  setPostedMessage,
-}) => {
+export const AddComment = ({ setMessage, message, setPostedMessage }) => {
   const { reviewid } = useParams();
 
   const [isLoading, setIsLoading] = useState(false);
   const [err, setErr] = useState(null);
   const [postBody, setPostBody] = useState("");
 
+  const currentUser = useContext(UserContext);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     setIsLoading(true);
     postComment(reviewid, {
-      username: currentUser,
+      username: currentUser.currentUser,
       body: postBody,
     })
       .then(() => {
