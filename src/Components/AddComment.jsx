@@ -16,6 +16,7 @@ export const AddComment = ({ setMessage, message, setPostedMessage }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setMessage(null);
     setIsLoading(true);
     postComment(reviewid, {
       username: currentUser.currentUser,
@@ -39,6 +40,8 @@ export const AddComment = ({ setMessage, message, setPostedMessage }) => {
     return (
       <div className={styles.postComment}>
         <ErrorPage err={err} />
+
+        <p>Error posting, resubmit</p>
 
         <form onSubmit={handleSubmit}>
           <label htmlFor="postBody">Comment: </label>

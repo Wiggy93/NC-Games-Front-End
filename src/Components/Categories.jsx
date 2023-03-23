@@ -6,14 +6,23 @@ import { AddCategory } from "./AddCategory";
 
 export const Categories = ({ categories, setCategories, setCategory }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [err, setErr] = useState(null);
+  const [postedMessage, setPostedMessage] = useState({ display: "none" });
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     setIsLoading(true);
-    getCategories().then((data) => {
-      setCategories(data.categories);
-      setIsLoading(false);
-    });
-  }, []);
+    getCategories()
+      .then((data) => {
+        setCategories(data.categories);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setErr(err);
+        setIsLoading(false);
+      });
+  }, [message]);
 
   if (isLoading) return <p>Loading categories...</p>;
 
@@ -41,7 +50,11 @@ export const Categories = ({ categories, setCategories, setCategory }) => {
           );
         })}
       </div>
-      <AddCategory />
+      <AddCategory
+        setPostedMessage={setPostedMessage}
+        setMessage={setMessage}
+      />
+      <p style={postedMessage}>{message}</p>
     </section>
   );
 };
