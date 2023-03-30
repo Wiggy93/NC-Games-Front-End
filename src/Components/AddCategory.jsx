@@ -65,23 +65,31 @@ export const AddCategory = ({ setPostedMessage, setMessage }) => {
 
   return (
     <section className={styles.postCategory}>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="slugBody">Category Title</label>
+      <form onSubmit={handleSubmit} className={styles.formBox}>
+        <label htmlFor="slugBody" className={styles.label}>
+          Category Title
+        </label>
         <textarea
           type="text"
           id="slugBody"
           value={slug}
           required
           onChange={(e) => setSlug(e.target.value)}
+          className={styles.textBox}
         ></textarea>
-        <label htmlFor="descriptionBody">Description</label>
+        <br></br>
+        <label htmlFor="descriptionBody" className={styles.label}>
+          Description
+        </label>
         <textarea
           type="text"
           id="decriptionBody"
           value={description}
           required
           onChange={(e) => setDescription(e.target.value)}
+          className={styles.textBox}
         ></textarea>
+        <br></br>
         <button type="submit">Create New Category</button>
       </form>
     </section>
