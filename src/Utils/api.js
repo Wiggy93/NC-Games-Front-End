@@ -66,6 +66,11 @@ export const getUsers = () => {
   });
 };
 
+export const getSingleUser = (username) => {
+  return ncGamesAPI.get(`/users/${username}`).then(({ data }) => {
+    return data;
+  });
+};
 export const postCategory = (categorybody) => {
   return ncGamesAPI.post("/categories", categorybody).then(({ data }) => {
     return data;
