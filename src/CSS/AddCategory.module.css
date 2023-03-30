@@ -1,0 +1,26 @@
+.postCategory {
+ color: #1639c4;;   
+ background-color: #E5E0FF; ;
+ border: 2px solid #4a66d8;
+ border-radius: 5px;
+ padding: 20px;
+ align-items: center;
+ display: flex;
+}
+
+.formBox {
+    min-height: 240px;
+    width: 100%;
+    display: inline-block;
+
+}
+
+.label {
+    padding-right: 10px;
+    height: 50px;
+}
+
+.textBox {
+    min-height: 50px;
+    min-width: 80%;
+}

@@ -65,3 +65,9 @@ export const getUsers = () => {
     return data.allUsers;
   });
 };
+
+export const postCategory = (categorybody) => {
+  return ncGamesAPI.post("/categories", categorybody).then(({ data }) => {
+    return data;
+  });
+};
