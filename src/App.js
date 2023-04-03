@@ -6,6 +6,7 @@ import { Users } from "./Components/Users";
 import { NavBar } from "./Components/NavBar";
 import { Comments } from "./Components/Comments";
 import { TopReviews } from "./Components/TopReviews";
+import { NotFound } from "./Components/NotFound";
 
 import { Routes, Route, Link } from "react-router-dom";
 import { useState } from "react";
@@ -19,6 +20,7 @@ function App() {
   const [selectedFilterOption, setSelectedFilterOption] = useState(null);
   const [selectedSortBy, setSelectedSortBy] = useState(null);
   const [selectedOrder, setSelectedOrder] = useState(null);
+  const [err, setErr] = useState(null);
 
   return (
     <div className="App">
@@ -41,6 +43,7 @@ function App() {
         <br></br>
         <TopReviews />
         <Routes>
+          <Route path="*" element={<NotFound />}></Route>
           <Route
             path="/categories"
             element={
@@ -70,7 +73,7 @@ function App() {
             }
           ></Route>
 
-          <Route path="users" element={<Users />}></Route>
+          <Route path="/users" element={<Users />}></Route>
           <Route path="/users/:username" element={<SingleUser />}></Route>
           <Route
             path="/reviews/:reviewid"
