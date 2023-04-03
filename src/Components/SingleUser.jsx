@@ -12,19 +12,23 @@ export const SingleUser = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    getSingleUser(username).then((data) => {
-      setCurrentSingleUser(data.user[0]);
-      setIsLoading(false).catch((err) => {
-        console.log(err, "err");
-        setErr(err);
+    getSingleUser(username)
+      .then((data) => {
+        setCurrentSingleUser(data.user[0]);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setErr(err.response.data.message);
         setIsLoading(false);
       });
-    });
   }, []);
 
-  if (isLoading) return <p>Loading {username}'s details</p>;
-
-  if (err) return <ErrorPage err={err} />;
+  if (err) {
+    console.log(err, "error page");
+    return <p>Error: {err}</p>;
+  } else if (isLoading) {
+    return <p>Loading {username}'s details</p>;
+  }
 
   return (
     <section className={styles.section}>
