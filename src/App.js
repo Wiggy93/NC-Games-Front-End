@@ -10,6 +10,7 @@ import { TopReviews } from "./Components/TopReviews";
 import { Routes, Route, Link } from "react-router-dom";
 import { useState } from "react";
 import { SingleReview } from "./Components/SingleReview";
+import { SingleUser } from "./Components/SingleUser";
 
 function App() {
   const [categories, setCategories] = useState([]);
@@ -70,6 +71,7 @@ function App() {
           ></Route>
 
           <Route path="users" element={<Users />}></Route>
+          <Route path="/users/:username" element={<SingleUser />}></Route>
           <Route
             path="/reviews/:reviewid"
             element={
