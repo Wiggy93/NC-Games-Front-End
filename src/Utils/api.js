@@ -66,22 +66,6 @@ export const getUsers = () => {
   });
 };
 
-export const getSingleUser = (username) => {
-  return ncGamesAPI.get(`/users/${username}`).then(({ data }) => {
-    return data;
-  });
-  // .catch((err) => {
-  //   if (err.response) {
-  //     console.log(err.response.data, "<<< data");
-  //     return err.response.data;
-  //   } else if (err.request) {
-  //     console.log(err.request, "<<<request");
-  //   } else {
-  //     console.log(err.message, "api");
-  //     return err.message;
-  //   }
-  // });
-};
 export const postCategory = (categorybody) => {
   return ncGamesAPI.post("/categories", categorybody).then(({ data }) => {
     return data;

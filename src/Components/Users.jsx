@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { getUsers } from "../Utils/api";
 import styles from "../CSS/Users.module.css";
 import { ErrorPage } from "./ErrorPage";
-import { Link } from "react-router-dom";
 
 export const Users = () => {
   const [loading, setIsLoading] = useState(false);
@@ -41,16 +40,13 @@ export const Users = () => {
         {users.map((user) => {
           return (
             <div key={user.username} className={styles.singleUserBox}>
-              <Link to={`/users/${user.username}`}>
-                <article>
-                  <h3>{user.username}</h3>
-                  <img
-                    src={user.avatar_url}
-                    alt={user.username}
-                    className={styles.userImage}
-                  ></img>
-                </article>
-              </Link>
+              <h3>{user.username}</h3>
+              <p>{user.name}</p>
+              <img
+                src={user.avatar_url}
+                alt={user.username}
+                className={styles.userImage}
+              ></img>
             </div>
           );
         })}
