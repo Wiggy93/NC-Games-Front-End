@@ -1,12 +1,12 @@
 import styles from "../CSS/ErrorPage.module.css";
 
 export const ErrorPage = ({ err }) => {
-  // if (!err.response)
-  //   return (
-  //     <section>
-  //       <p>Error: {err.request.message}</p>
-  //     </section>
-  //   );
+  if (!err.response)
+    return (
+      <section>
+        <p>Error: {err.message}</p>
+      </section>
+    );
 
   return (
     <section className={styles.section}>

@@ -78,7 +78,9 @@ export const Comments = () => {
   };
 
   if (isLoading) return <p>Loading comments...</p>;
-
+  if (err) {
+    return <ErrorPage err={err} />;
+  }
   if (allComments.length === 0) {
     return (
       <section>
@@ -91,8 +93,6 @@ export const Comments = () => {
         />
       </section>
     );
-  } else if (err) {
-    return <ErrorPage err={err} />;
   }
 
   return (

@@ -20,7 +20,6 @@ function App() {
   const [selectedFilterOption, setSelectedFilterOption] = useState(null);
   const [selectedSortBy, setSelectedSortBy] = useState(null);
   const [selectedOrder, setSelectedOrder] = useState(null);
-  const [err, setErr] = useState(null);
 
   return (
     <div className="App">
