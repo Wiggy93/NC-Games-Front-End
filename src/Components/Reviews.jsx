@@ -66,6 +66,7 @@ export const Reviews = ({
   if (err) {
     return (
       <div>
+        <p>Reviews Error</p>
         <ErrorPage err={err} />
       </div>
     );

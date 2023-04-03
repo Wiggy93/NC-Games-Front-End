@@ -1,10 +1,24 @@
+import styles from "../CSS/ErrorPage.module.css";
+
 export const ErrorPage = ({ err }) => {
-  console.log(err, "actual error page");
+  // if (!err.response)
+  //   return (
+  //     <section>
+  //       <p>Error: {err.request.message}</p>
+  //     </section>
+  //   );
+
   return (
-    <section>
-      <p>{err}</p>
-      {/* <p>{err.response.data.msg}</p> */}
-      {/* <p>{err.response.data.message}</p> */}
+    <section className={styles.section}>
+      <p>
+        <b>Error Status Code: </b>
+        {err.response.status}
+      </p>
+      <br></br>
+      <p>
+        <b>Error: </b>
+        {err.response.data.message}
+      </p>
     </section>
   );
 };
